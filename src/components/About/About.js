@@ -85,7 +85,7 @@ const About = () => {
               <div className="timeline-date">2021 - 2023</div>
               <div className="timeline-content">
                 <h4>Frontend Intern</h4>
-                <p>Factory Inc.</p>
+                <p>HIIT Plc</p>
                 <p>
                   Developed user-friendly web applications and collaborated with
                   cross-functional teams to implement responsive designs and improve user experience.
