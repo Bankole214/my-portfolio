@@ -55,7 +55,7 @@ const Projects = () => {
       description: "A collaborative task management application",
       technologies: ["Html", "css", "Material-UI", "JavaScript"],
       github: "https://github.com/Bankole214/QR_CODE_GENERATOR",
-      demo: "https://bankole214.github.io/QR_CODE_GENERATOR/",
+      demo: "https://bankole214.github.io/ROCK-PAPER-SCISSORS-WITH-JS/",
       image: ProjectCard6,
     },
   ];
