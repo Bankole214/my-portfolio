@@ -6,6 +6,7 @@ import ProjectCard3 from "../../assets/images/personal_finance_tracker.png"
 import ProjectCard4 from "../../assets/images/Nigeria_holiday_calendar.png";
 import ProjectCard5 from "../../assets/images/QR-CODE.png";
 import ProjectCard6 from "../../assets/images/GAME.png"
+import ProjectCard7 from "../../assets/images/invoice.png";
 
 const Projects = () => {
   const projects = [
@@ -57,6 +58,14 @@ const Projects = () => {
       github: "https://github.com/Bankole214/QR_CODE_GENERATOR",
       demo: "https://bankole214.github.io/ROCK-PAPER-SCISSORS-WITH-JS/",
       image: ProjectCard6,
+    },
+    {
+      title: "Freelance Invoice Generator",
+      description: "A collaborative invoice generator application",
+      technologies: ["React", "css", "Material-UI", "JavaScript"],
+      github: "https://github.com/Bankole214/freelance-invoice-generator",
+      demo: "https://freelance-invoice-generator-sigma.vercel.app/",
+      image: ProjectCard7,
     },
   ];
 
