@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser"; 
 import "./Contact.css";
 
@@ -34,12 +36,10 @@ const Contact = () => {
   };
 
   const handleFallbackSubmit = (formData) => {
-    // Create a mailto link as fallback
     const subject = `Portfolio Contact from ${formData.name}`;
     const body = `Name: ${formData.name}%0AEmail: ${formData.email}%0A%0AMessage:%0A${formData.message}`;
-
     window.location.href = `mailto:adegunlenurudeen214@gmail.com?subject=${subject}&body=${body}`;
-    return Promise.resolve(); // Simulate success
+    return Promise.resolve();
   };
 
   const handleSubmit = async (e) => {
@@ -48,21 +48,15 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      // Try EmailJS first
       await handleEmailJSSubmit(formData);
-      console.log("Email sent via EmailJS");
       setSubmitStatus("success");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.log("EmailJS failed, using fallback:", error);
-
-      // Use fallback method
       try {
         await handleFallbackSubmit(formData);
         setSubmitStatus("fallback");
         setFormData({ name: "", email: "", message: "" });
       } catch (fallbackError) {
-        console.error("All methods failed:", fallbackError);
         setSubmitStatus("error");
       }
     } finally {
@@ -73,80 +67,118 @@ const Contact = () => {
   return (
     <section id="contact" className="contact section">
       <div className="container">
-        <h2 className="section-title">Get In Touch</h2>
-        <div className="contact-content">
-          <div className="contact-info">
-            <h3>Let's work together!</h3>
-            <p>I'm always interested in new opportunities and challenges.</p>
-            <div className="contact-details">
-              <div className="contact-item">
-                <strong>Email:</strong> adegunlenurudeen214@gmail.com
-              </div>
-              <div className="contact-item">
-                <strong>Phone:</strong> +2348135522924
-              </div>
-              <div className="contact-item">
-                <strong>Location:</strong> Lagos, Nigeria
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="section-title">Get In Touch</h2>
+          
+          <div className="contact-grid">
+            <div className="contact-info">
+              <h3 className="contact-heading">Let's build something together</h3>
+              <p className="contact-text">
+                I'm currently looking for new opportunities. Whether you have a question 
+                or just want to say hi, I'll try my best to get back to you!
+              </p>
+
+              <div className="contact-details">
+                <div className="contact-item">
+                  <div className="icon-box"><Mail /></div>
+                  <div className="detail-text">
+                    <span>Email</span>
+                    <a href="mailto:adegunlenurudeen214@gmail.com">adegunlenurudeen214@gmail.com</a>
+                  </div>
+                </div>
+                <div className="contact-item">
+                  <div className="icon-box"><Phone rotate={90} /></div>
+                  <div className="detail-text">
+                    <span>Phone</span>
+                    <a href="tel:+2348135522924">+234 813 552 2924</a>
+                  </div>
+                </div>
+                <div className="contact-item">
+                  <div className="icon-box"><MapPin /></div>
+                  <div className="detail-text">
+                    <span>Location</span>
+                    <p>Lagos, Nigeria</p>
+                  </div>
+                </div>
               </div>
             </div>
+
+            <div className="contact-form-container">
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div className="form-group">
+                  <textarea
+                    name="message"
+                    placeholder="How can I help you?"
+                    rows="5"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    disabled={isSubmitting}
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary submit-btn"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : (
+                    <>
+                      Send Message <Send size={16} />
+                    </>
+                  )}
+                </button>
+
+                {/* Status Messages */}
+                {submitStatus === "success" && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="status-message success"
+                  >
+                    <CheckCircle size={18} /> Message sent successfully!
+                  </motion.div>
+                )}
+                {submitStatus === "error" && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="status-message error"
+                  >
+                    <AlertCircle size={18} /> Failed to send message.
+                  </motion.div>
+                )}
+              </form>
+            </div>
           </div>
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              disabled={isSubmitting}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              disabled={isSubmitting}
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows="5"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              disabled={isSubmitting}></textarea>
-
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={isSubmitting}>
-              {isSubmitting ? "Sending..." : "Send Message"}
-            </button>
-
-            {/* Status Messages */}
-            {submitStatus === "success" && (
-              <div className="status-message success">
-                ✅ Message sent successfully! I'll get back to you soon.
-              </div>
-            )}
-            {submitStatus === "fallback" && (
-              <div className="status-message info">
-                📧 Opening your email client... Please send the pre-filled
-                email.
-              </div>
-            )}
-            {submitStatus === "error" && (
-              <div className="status-message error">
-                ❌ Failed to send message. Please email me directly at{" "}
-                <a href="mailto:adegunlenurudeen214@gmail.com">
-                  adegunlenurudeen214@gmail.com
-                </a>
-              </div>
-            )}
-          </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

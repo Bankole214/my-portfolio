@@ -1,65 +1,150 @@
-/* styles/globals.css */
+/* src/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Colors - Premium Navy/Blue Palette */
+  --bg: #0a192f;
+  --bg-secondary: #0d1e3a;
+  --bg-card: #112240;
+  --accent: #64ffda;
+  --accent-glow: rgba(100, 255, 218, 0.1);
+  --text-primary: #ccd6f6;
+  --text-secondary: #8892b0;
+  --text-dim: #495670;
+  --white: #e6f1ff;
+
+  /* Glassmorphism */
+  --glass: rgba(17, 34, 64, 0.7);
+  --glass-border: rgba(100, 255, 218, 0.1);
+  --glass-blur: blur(10px);
+  
+  /* Transitions */
+  --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  
+  /* Spacing */
+  --container-max: 1200px;
+  --section-padding: 100px;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-:root {
-  --primary-color: #2563eb;
-  --secondary-color: #1e40af;
-  --text-dark: #1f2937;
-  --text-light: #6b7280;
-  --background: #ffffff;
-  --accent: #f59e0b;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
   line-height: 1.6;
-  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  color: var(--white);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 2rem;
 }
 
 .section {
-  padding: 5rem 0;
+  padding: var(--section-padding) 0;
 }
 
+.section-title {
+  font-size: clamp(26px, 5vw, 32px);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 200px;
+  height: 1px;
+  background-color: var(--text-dim);
+}
+
+/* Button Styles */
 .btn {
   display: inline-block;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  padding: 1rem 1.75rem;
+  border-radius: 4px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
   cursor: pointer;
+  border: 1px solid var(--accent);
 }
 
 .btn-primary {
-  background: var(--primary-color);
-  color: white;
+  background: transparent;
+  color: var(--accent);
 }
 
 .btn-primary:hover {
-  background: var(--secondary-color);
-  transform: translateY(-2px);
+  background: var(--accent-glow);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -15px var(--accent-glow);
 }
 
 .btn-outline {
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 1px solid var(--text-dim);
+  color: var(--text-secondary);
 }
 
 .btn-outline:hover {
-  background: var(--primary-color);
-  color: white;
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+  transform: translateY(-3px);
 }
 
-html {
-  scroll-behavior: smooth;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-dim);
+  border: 3px solid var(--bg);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-glow);
+  color: var(--accent);
 }
