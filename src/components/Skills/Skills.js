@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Code2, Server, Database, Layout, Smartphone, Github } from "lucide-react";
+import { Server, Database, Layout } from "lucide-react";
 import "./Skills.css";
 
 const Skills = () => {

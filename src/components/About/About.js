@@ -1,8 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Calendar, Briefcase, Award, Users } from "lucide-react";
+import { Briefcase, Award, Users } from "lucide-react";
 import "./About.css";
-import profileImage from "../../assets/images/IMG_5994.jpg";
 import resumePDF from "../../assets/images/Nurudeen_Dimeji_CV.pdf";
 
 const About = () => {
