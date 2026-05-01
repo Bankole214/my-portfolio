@@ -8,7 +8,10 @@ import Projects from './components/Projects/Projects';
 import Contact from './components/Contacts/Contact.js';
 import Footer from './components/Footer/Footer';
 
+import useVisitNotification from './hooks/useVisitNotification';
+
 function App() {
+  useVisitNotification();
   return (
     <div className="App">
       <Header />
